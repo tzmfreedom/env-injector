@@ -2,8 +2,10 @@ package envinjector
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/secretsmanager"
+	"gopkg.in/yaml.v2"
 	"os"
 )
 
@@ -21,6 +23,19 @@ func injectEnvironSecretManager(name string, decorator envKeyDecorator) {
 	err = json.Unmarshal([]byte(aws.StringValue(ret.SecretString)), &secrets)
 	if err != nil {
 		logger.Fatalf("secretsmanager:GetSecretValue returns invalid json. (name: %s)\n %v", name, err)
+	}
+	converts := make(map[string]string)
+	if path := os.Getenv("ENV_INJECTOR_CONVERT_YAML"); path != "" {
+		fmt.Printf("hogehoge")
+		buf, err := ioutil.ReadFile(path)
+		if err != nil {
+			logger.Fatalf("secretsmanager:GetSecretValue returns invalid json. (name: %s)\n %v", name, err)
+		}
+		err = yaml.Unmarshal(buf, &converts)
+		if err != nil {
+			logger.Fatalf("secretsmanager:GetSecretValue returns invalid json. (name: %s)\n %v", name, err)
+		}
+		fmt.Printf("%v", converts)
 	}
 	for key, val := range secrets {
 		key = decorator.decorate(key)
