@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/okzk/env-injector/envinjector"
 	"log"
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/okzk/env-injector/envinjector"
 )
 
 func main() {

@@ -1,11 +1,12 @@
 package envinjector
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/ssm"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
 func injectEnvironByPath(path string, decorator envKeyDecorator) {

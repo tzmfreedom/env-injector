@@ -1,11 +1,12 @@
 package envinjector
 
 import (
+	"log"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ssm"
 	"gopkg.in/yaml.v2"
-	"log"
-	"strings"
 )
 
 type envKeyDecorator interface {

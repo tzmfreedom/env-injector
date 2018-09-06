@@ -2,9 +2,10 @@ package envinjector
 
 import (
 	"encoding/json"
+	"os"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/secretsmanager"
-	"os"
 )
 
 func injectEnvironSecretManager(name string, decorator envKeyDecorator) {
